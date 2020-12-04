@@ -10,8 +10,8 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
     UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-export default ({ route: { params: { detail } } }) => {
-
+export default ({ route: { params: { detail, albumId } } }) => {
+    console.log(albumId, 'HALO ALBUM')
     // for current page
     const [state, setState] = useState(detail)
     // for update global
@@ -41,7 +41,7 @@ export default ({ route: { params: { detail } } }) => {
                 data={result.slice(0, pagination)}
                 renderItem={({ id, title, albumId, ...rest }) => (
                     <RenderItem
-                        {...{ data, setData, setState }}
+                        {...{ data, setData, setState, state }}
                         {...rest}
                     />
                 )}
@@ -52,6 +52,7 @@ export default ({ route: { params: { detail } } }) => {
 
 const RenderItem = ({
     item,
+    state,
     setState,
     swipeThreshold = -150,
     onSwipe = () => null,
@@ -65,8 +66,8 @@ const RenderItem = ({
             key={item.id}
             onSwipe={() => {
                 const newArr = data.filter(v => v !== item)
+                setState(state.filter(v => v !== item))
                 setData(newArr)
-                setState(newArr)
                 _storeData(newArr)
                 LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
             }}
