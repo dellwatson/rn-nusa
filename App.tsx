@@ -24,15 +24,14 @@ import DetailScreen from './src/screens/DetailScreen';
 import AddScreen from './src/screens/AddScreen';
 // import { SafeAreaProvider } from "react-native-safe-area-context";
 import DataProvider from './DataProvider'
-import { navigate } from '@react-navigation/routers/lib/typescript/src/CommonActions';
 
 export default () => {
   const Stack = createStackNavigator();
   useEffect(() => {
 
-    // fetch('https://jsonplaceholder.typicode.com/photos')
+    // fetch('https://nextar.flip.id/frontend-test')
     //   .then(res => res.json())
-    //   .then(res => console.log(res.length, 'res'))
+    //   .then(res => console.log(res, 're dapns'))
     //   .catch(e => console.log(e, 'e'))
   }, [])
 
@@ -51,8 +50,8 @@ export default () => {
             gestureEnabled: true,
             cardOverlayEnabled: true,
           }}
-          initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomeScreen} />
+          initialRouteName="Albums">
+          <Stack.Screen name="Albums" component={HomeScreen} />
           <Stack.Screen
             name="Detail" component={DetailScreen} />
           <Stack.Screen

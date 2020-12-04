@@ -1,10 +1,5 @@
 import React, { useState, createContext, useEffect } from 'react';
-// import { User } from 'firebase';
-// import { auth, } from './components/Firebase';
-// import Spinner from './components/Spinner';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Alert } from 'react-native';
 
 export const DataContext = createContext({
     data: [],
@@ -18,23 +13,23 @@ export default ({ children }) => {
     //check asyncstorage udah pernah load ?
     //klo belom load
     useEffect(() => {
+
         const getData = async () => {
             try {
                 const jsonValue = await AsyncStorage.getItem('@data')
-                return jsonValue != null ? setData(JSON.parse(jsonValue).slice(0, 3)) : _loadData();
+                return jsonValue != null ? setData(JSON.parse(jsonValue)) : _loadData();
             } catch (e) {
                 // error reading value
             }
         }
 
-        console.log('xx called')
         getData()
+        // _loadData()
     }, []);
 
     // if (isLoading) {
     //     return <Spinner />;
     // }
-    // console.log(getData(), 'data')
 
     return (
         <DataContext.Provider
@@ -49,7 +44,9 @@ export default ({ children }) => {
 
 const _loadData = () => fetch('https://jsonplaceholder.typicode.com/photos')
     .then(res => res.json())
-    .then(res => _storeData(res))
+    .then(res => {
+        _storeData(res)
+    })
     .catch(e => alert(e.toString()))
 
 
