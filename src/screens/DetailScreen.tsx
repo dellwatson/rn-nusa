@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react'
 import { StyleSheet, View, LayoutAnimation, Platform, UIManager, Text, TextInput, Image } from 'react-native'
 import _ from 'lodash'
 import { DataContext, _storeData } from '../../DataProvider'
-import { FlatList, } from 'react-native-gesture-handler'
-import SwipeRow from '../components/SwipeRow'
+import { FlatList, RectButton } from 'react-native-gesture-handler'
+// import SwipeRow from '../components/SwipeRow'
+import AndroidSwipe from '../components/AndroidSwipe'
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
     UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -32,7 +33,7 @@ export default ({ route: { params: { detail } } }) => {
                 onChangeText={x => setSearchQuery(x)}
                 value={searchQuery}
             />
-            <Text style={{ color: 'grey', margin: 10, textAlign: 'center' }}>Swipe left to delete</Text>
+            <Text style={{ color: 'grey', margin: 10, textAlign: 'center' }}>Swipe to delete</Text>
 
             <FlatList
                 onEndReached={() => setPagination(pagination + 10)}
@@ -58,9 +59,8 @@ const RenderItem = ({
     setData = () => null
 }) => {
     const [img, setImg] = useState(item.url)
-
     return (
-        <SwipeRow
+        <AndroidSwipe
             {...{ item, swipeThreshold, onSwipe }}
             key={item.id}
             onSwipe={() => {
@@ -79,9 +79,10 @@ const RenderItem = ({
                 <Text style={[styles.text]}>id: {item.id}</Text>
                 <Text style={[styles.title]}>{item.title}</Text>
             </View>
-        </SwipeRow>
+        </AndroidSwipe>
     )
 }
+
 
 
 

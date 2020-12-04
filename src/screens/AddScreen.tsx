@@ -18,7 +18,6 @@ export default ({ navigation }) => {
             <Button
                 onPress={_ => {
                     const newData = [...data, { ...state, albumId: Number(state.albumId) }]
-                    console.log({ ...state, albumId: Number(state.albumId) })
                     setData(newData)
                     _storeData(newData)
                     navigation.goBack()

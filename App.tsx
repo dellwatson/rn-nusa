@@ -22,8 +22,8 @@ import { createStackNavigator, TransitionPresets } from '@react-navigation/stack
 import HomeScreen from './src/screens/HomeScreen';
 import DetailScreen from './src/screens/DetailScreen';
 import AddScreen from './src/screens/AddScreen';
-// import { SafeAreaProvider } from "react-native-safe-area-context";
 import DataProvider from './DataProvider'
+// import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default () => {
   const Stack = createStackNavigator();
